@@ -32,7 +32,7 @@
 
 .btn-container{
 
-    margin-top: 95px;
+    margin-top: 85px;
     display: flex;
     justify-content: space-between;
     padding: 0px 8px;
@@ -44,5 +44,12 @@ button {
     border: transparent;
     border-radius: 8px;
     padding: 8px;
+    cursor: pointer;
+}
+
+.close-btn {
+    position: relative;
+ left: 1100px;
+top : 80px ; 
     cursor: pointer;
 }

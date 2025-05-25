@@ -8,59 +8,85 @@ const messages = [
 ];
 
 function App() {
-  let [step , setStep] = useState (1)
-  const [isOpen , setIsopen] = useState (true) ; 
-  // const [test , setTest] = useState ({name : "nader"})
+  let [step, setStep] = useState(1);
+  const [isOpen, setIsopen] = useState(true);
 
-  // const step = 2;
- function handlePrevious (){
-   if (step > 1) {
-    /// bac practice :: 
-    // setStep(step-1)  
-    // setStep (step -1)
-///// good practice ::: 
-    setStep ((current)=> current - 1  )
-    // setStep ((current)=> current - 1  )
+  function handlePrevious() {
+    if (step > 1) {
+      setStep((current) => current - 1);
+    }
+  }
 
-   } 
- }
-
- function handleNext (){
- if (step < 3)  setStep((cur)=> cur + 1 )
-  /// bad practice ::
-  // test.name = "khouloud"
-  /// good practice :: 
-  // setTest ({name : "jalila"})
- }
-
-
+  function handleNext() {
+    if (step < 3) setStep((cur) => cur + 1);
+  }
 
   return (
+    <>
+      <div onClick={() => setIsopen((cur) => !cur)} className="close-btn">
+        ✖️
+      </div>
+      {isOpen && (
+        <div className="App">
+          <div className="num-steps-container">
+            <p className={`step ${step >= 1 ? "active" : ""}`}>1</p>
+            <p className={`step ${step >= 2 ? "active" : ""}`}>2</p>
+            <p className={`step ${step >= 3 ? "active" : ""}`}>3</p>
+          </div>
+          {/* ////////// */}
+       
+  <StepMessage step={step}>    {messages[step - 1]}        </StepMessage>
+
+       
+
+          <div className="btn-container">
+            {/* <Button
+      bgColor="#7950f2" textColor="#fff" onClick={handlePrevious}
+      text = "previous" emoji = "👈"
+      /> */}
+
+            <Button bgColor="#7950f2" textColor="#fff" onClick={handlePrevious}>
+              👈 Previous
+            </Button>
+
+            <Button bgColor="#7950f2" textColor="#fff" onClick={handleNext}>
+              Next 👉
+            </Button>
+
+            {/* <button onClick={handlePrevious}>Previous</button>
+            <button onClick={handleNext}>Next</button> */}
+          </div>
 
 
- 
-<>
-<div  onClick={()=> setIsopen( (cur)=> !cur) } className="close-btn">✖️</div>
-  {isOpen &&  <div className="App">
-         <div className="num-steps-container">
-           <p className={`step ${step >= 1 ? "active" : ""}`}>1</p>
-           <p className={`step ${step >= 2 ? "active" : ""}`}>2</p>
-           <p className={`step ${step >= 3 ? "active" : ""}`}>3</p>
-         </div>
-         <p className="step-info">
-           Step {step} : {messages[step - 1]}
-         </p>
-         {/* <p>{test.name}</p> */}
-         <div className="btn-container">
-           <button onClick={handlePrevious}>Previous</button>
-           <button onClick={handleNext}>Next</button>
-         </div>
-   </div>}
-</>
+     
 
-  ) }
+     
 
   
-
+        
+        </div>
+      )}
+    </>
+  );
+}
 
 export default App;
+
+function Button({ bgColor, textColor, onClick, children }) {
+  return (
+    <button
+      style={{ backgroundColor: bgColor, color: textColor }}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+}
+
+
+
+const StepMessage = function ({step , children}){
+  return            <p className="step-info">
+         Step {step} : {children}
+       </p>
+}
